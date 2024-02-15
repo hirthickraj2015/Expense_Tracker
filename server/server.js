@@ -1,22 +1,23 @@
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan")
+const colors = require('colors')
+const morganLogger = require('./utils/logger')
 const { connectDB } = require("./utils/db");
 const dotenv = require("dotenv");
 const router = require("./routes/route");
-const { errorHandler, notFound } = require("./middleware/error.middleware");
+const { notFound, errorHandler } = require("./middleware/error.middleware");
 dotenv.config();
 
-const app = express(); 
+const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(morgan("tiny"))
+app.use(morganLogger())
 
 app.use(router);
 
-app.use(notFound);
-app.use(errorHandler);
+app.use(notFound)
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 4000;
 
