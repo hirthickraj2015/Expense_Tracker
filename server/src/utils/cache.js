@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const { createClient } = require('redis')
-let client = createClient()
+let client = createClient({
+    host: 'localhost',
+    port: 6379
+  })
 
 // const Redis = require('ioredis');
 // const fs = require('fs');
